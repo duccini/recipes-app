@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useEffect } from "react";
 
 const {
   Text,
@@ -11,8 +11,17 @@ const {
 
 import styles from "./styles";
 import Button from "../../components/Button";
+import { getRecipesList } from "../../api";
 
 const Splash = ({ navigation, onPress }) => {
+  useEffect(() => {
+    handleFetchRecipes();
+  }, []);
+
+  const handleFetchRecipes = async () => {
+    const recipes = await getRecipesList();
+  };
+
   return (
     <SafeAreaView>
       <ImageBackground
