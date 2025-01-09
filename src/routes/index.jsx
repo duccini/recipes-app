@@ -1,23 +1,47 @@
 import { memo } from "react";
 import "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import Splash from "../screens/Splash";
 import Home from "../screens/Home";
+import Search from "../screens/Search";
+import ReturnButton from "../components/ReturnButton";
 
 const Stack = createStackNavigator();
 
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: "#ffffff",
+  },
+};
+
 const Routes = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
+    <NavigationContainer theme={theme}>
+      <Stack.Navigator
+        screenOptions={{
+          headerShadowVisible: false,
+          headerTitleAlign: "center",
+        }}
+      >
         <Stack.Screen
           options={{ headerShown: false }}
           component={Splash}
           name="Splash"
         />
-        <Stack.Screen component={Home} name="Home" />
+        <Stack.Screen
+          component={Home}
+          name="Home"
+          options={{ headerLeft: null, gestureEnabled: false }}
+        />
+        <Stack.Screen
+          options={{ headerLeft: (props) => <ReturnButton {...props} /> }}
+          component={Search}
+          name="Search"
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
