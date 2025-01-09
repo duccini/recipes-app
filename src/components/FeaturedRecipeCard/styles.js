@@ -9,9 +9,11 @@ const { width } = Dimensions.get("window");
 const styles = StyleSheet.create({
   container: {
     padding: 12,
-    marginVertical: 16,
     marginTop: 46,
+    marginBottom: 32,
+    marginRight: 16,
     width: width * 0.7,
+
     backgroundColor: colors.white,
     shadowColor: "#000",
     shadowOffset: {
@@ -26,8 +28,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 
+  header: {
+    flex: 1,
+    height: 46,
+  },
+
   title: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: "bold",
     color: colors.grey,
     flex: 1,
@@ -42,7 +49,14 @@ const styles = StyleSheet.create({
 
   footerText: {
     color: colors.lightGrey2,
-    fontSize: 12,
+    fontSize: 14,
+  },
+
+  footer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 20,
+    justifyContent: "space-between",
   },
 
   authorImage: {
@@ -52,7 +66,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
 
-  author: {
+  rowContainer: {
     flexDirection: "row",
     alignItems: "center",
   },

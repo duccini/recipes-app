@@ -9,14 +9,17 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 12,
   },
+
   activeItem: {
     color: colors.white,
   },
+
   itemContainer: {
     marginRight: 12,
 
     marginBottom: 14,
   },
+
   itemContainerSelected: {
     backgroundColor: colors.green,
     borderRadius: 10,

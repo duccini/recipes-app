@@ -2,14 +2,19 @@ import { memo } from "react";
 import { Image, Text, View } from "react-native";
 
 import styles from "./styles";
+import Rating from "../Rating";
 
-const FeaturedRecipeCard = ({ author, title, image, rating, time }) => {
+const FeaturedRecipeCard = ({ author, title, image, rating, time, style }) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.author}>
-        <Text numberOfLines={1} style={styles.title}>
-          {title}
-        </Text>
+    <View style={[styles.container, style]}>
+      <View style={styles.rowContainer}>
+        <View style={styles.header}>
+          <Text numberOfLines={1} style={styles.title}>
+            {title}
+          </Text>
+
+          <Rating rating={3.4} />
+        </View>
         <Image
           style={styles.recipeImage}
           source={{
@@ -18,13 +23,13 @@ const FeaturedRecipeCard = ({ author, title, image, rating, time }) => {
         />
       </View>
 
-      <View style={[styles.author, { justifyContent: "space-between" }]}>
-        <View style={styles.author}>
+      <View style={styles.footer}>
+        <View style={styles.rowContainer}>
           <Image style={styles.authorImage} source={{ uri: author.image }} />
           <Text style={styles.footerText}>By {author.name}</Text>
         </View>
 
-        <View style={styles.author}>
+        <View style={styles.rowContainer}>
           <Image
             style={styles.authorImage}
             source={require("../../../assets/timer.png")}
