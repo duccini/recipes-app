@@ -1,27 +1,17 @@
-import { memo, useEffect } from "react";
+import { memo } from "react";
 
 const {
   Text,
   View,
   ImageBackground,
   SafeAreaView,
-  StatusBar,
   Image,
 } = require("react-native");
 
 import styles from "./styles";
 import Button from "../../components/Button";
-import { getRecipesList } from "../../api";
 
 const Splash = ({ navigation, onPress }) => {
-  useEffect(() => {
-    handleFetchRecipes();
-  }, []);
-
-  const handleFetchRecipes = async () => {
-    const recipes = await getRecipesList();
-  };
-
   return (
     <SafeAreaView>
       <ImageBackground

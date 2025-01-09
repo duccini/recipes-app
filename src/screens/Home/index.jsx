@@ -1,14 +1,12 @@
-import { memo } from "react";
+import { memo, useContext, useEffect } from "react";
 
 import Title from "../../components/Title";
 import Categories from "../../components/Categories";
 
-const {
-  Text,
+const { SafeAreaView, FlatList } = require("react-native");
 
-  SafeAreaView,
-  FlatList,
-} = require("react-native");
+import { RecipesContext } from "../../context/Recipes";
+import { getRecipesList } from "../../api";
 
 import styles from "./styles";
 import Input from "../../components/Input";
@@ -16,6 +14,24 @@ import FeaturedRecipeCard from "../../components/FeaturedRecipeCard";
 import ClassifiedRecipeCard from "../../components/ClassifiedRecipeCard";
 
 const Home = ({ navigation }) => {
+  const { recipes, setRecipes, healthyRecipes, setHealthyRecipes } =
+    useContext(RecipesContext);
+
+  useEffect(() => {
+    handleFetchRecipes();
+    handleFetchHealthyRecipes();
+  }, []);
+
+  const handleFetchRecipes = async () => {
+    const { results } = await getRecipesList();
+    setRecipes(results);
+  };
+
+  const handleFetchHealthyRecipes = async () => {
+    const { results } = await getRecipesList("healthy", "5");
+    setHealthyRecipes(results);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Input pressable onPress={() => navigation.navigate("Search")} />
