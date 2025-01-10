@@ -4,7 +4,7 @@ import { Image, Text, View } from "react-native";
 import styles from "./styles";
 import Rating from "../Rating";
 
-const FeaturedRecipeCard = ({ author, title, image, rating, time, style }) => {
+const HealthyRecipeCard = ({ author, title, image, time, style }) => {
   return (
     <View style={[styles.container, style]}>
       <View style={styles.rowContainer}>
@@ -13,21 +13,25 @@ const FeaturedRecipeCard = ({ author, title, image, rating, time, style }) => {
             {title}
           </Text>
 
-          <Rating rating={3.4} />
+          <Rating rating={Math.floor(Math.random() * 5) + 2} />
         </View>
         <Image
           style={styles.recipeImage}
           source={{
-            uri: "https://www.allrecipes.com/thmb/qq9s8jlKplKUDEo3Gtk15EAJpHc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/ALR-recipe-24700-churros-VAT-hero-03-4x3-a7f6af1860934b0385f84ab9f13f2613.jpg",
+            uri: image,
           }}
         />
       </View>
 
       <View style={styles.footer}>
-        <View style={styles.rowContainer}>
-          <Image style={styles.authorImage} source={{ uri: author.image }} />
-          <Text style={styles.footerText}>By {author.name}</Text>
-        </View>
+        {author ? (
+          <View style={styles.rowContainer}>
+            <Image style={styles.authorImage} source={{ uri: author.image }} />
+            <Text style={styles.footerText}>By {author.name}</Text>
+          </View>
+        ) : (
+          <View /> // null iria quebrar o layout
+        )}
 
         <View style={styles.rowContainer}>
           <Image
@@ -41,4 +45,4 @@ const FeaturedRecipeCard = ({ author, title, image, rating, time, style }) => {
   );
 };
 
-export default memo(FeaturedRecipeCard);
+export default memo(HealthyRecipeCard);
