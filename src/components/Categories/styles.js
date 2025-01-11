@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     color: colors.green,
     paddingVertical: 8,
     paddingHorizontal: 12,
+    // textTransform: "capitalize",
   },
 
   activeItem: {

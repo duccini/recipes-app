@@ -1,4 +1,4 @@
-import { memo, useContext, useEffect } from "react";
+import { memo, useContext, useEffect, useState } from "react";
 
 import Title from "../../components/Title";
 import Categories from "../../components/Categories";
@@ -14,6 +14,9 @@ import HealthyRecipeCard from "../../components/HealthyRecipeCard";
 import ClassifiedRecipeCard from "../../components/ClassifiedRecipeCard";
 
 const Home = ({ navigation }) => {
+  // const [tags, setTags] = useState([]);
+  const [tagsDisplayName, setTagsDisplayName] = useState([]);
+  const [selectedTag, setSelectedTag] = useState("");
   const { recipes, setRecipes, healthyRecipes, setHealthyRecipes } =
     useContext(RecipesContext);
 
@@ -22,8 +25,22 @@ const Home = ({ navigation }) => {
     handleFetchHealthyRecipes();
   }, []);
 
+  useEffect(() => {
+    const tagsList = [];
+
+    recipes.forEach((recipe) => {
+      recipe.tags.forEach((tag) => {
+        if (!tagsList.includes(tag.name)) {
+          tagsList.push(tag.display_name);
+        }
+      });
+    });
+
+    setTagsDisplayName(tagsList);
+  }, [recipes]);
+
   const handleFetchRecipes = async () => {
-    const { results } = await getRecipesList();
+    const { results } = await getRecipesList(null, "15");
     setRecipes(results);
   };
 
@@ -64,27 +81,23 @@ const Home = ({ navigation }) => {
       />
 
       <Categories
-        categories={["All", "Trending"]}
-        selectedCategory="All"
-        onCategoryPress={() => {}}
+        categories={tagsDisplayName}
+        selectedCategory={selectedTag}
+        onCategoryPress={setSelectedTag}
       />
 
       <FlatList
         style={{ marginHorizontal: -24 }}
         horizontal
         showsHorizontalScrollIndicator={false}
-        data={[0, 1, 2, 3]}
-        keyExtractor={(item) => String(item)}
-        renderItem={({ index }) => (
+        data={recipes}
+        keyExtractor={(item) => String(item.id)}
+        renderItem={({ item, index }) => (
           <ClassifiedRecipeCard
             style={index === 0 ? { marginLeft: 24 } : null}
-            title="Steak with tomato sauce and bulgur rice."
-            time="20 min"
-            author={{
-              name: "James Milner",
-              image:
-                "https://conteudo.imguol.com.br/c/entretenimento/80/2017/04/25/a-atriz-zoe-saldana-como-neytiri-em-avatar-1493136439818_v2_4x3.jpg",
-            }}
+            title={item.name}
+            time={`${Math.floor(Math.random() * 60) + 10} min`}
+            image={item.thumbnail_url}
           />
         )}
       />
