@@ -11,6 +11,7 @@ const Input = ({
   placeholder = "Search recipe",
   pressable,
   onPress,
+  ...props
 }) => {
   const renderInput = () => (
     <View style={[styles.container, style]}>
@@ -21,6 +22,7 @@ const Input = ({
         />
       ) : null}
       <TextInput
+        {...props}
         editable={!pressable}
         placeholderTextColor={colors.lightGrey}
         style={styles.input}
