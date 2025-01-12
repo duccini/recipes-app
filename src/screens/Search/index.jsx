@@ -1,4 +1,4 @@
-import { memo, useContext, useState } from "react";
+import { memo, useContext, useEffect, useState } from "react";
 
 const { SafeAreaView, FlatList } = require("react-native");
 
@@ -9,7 +9,20 @@ import ClassifiedRecipeCard from "../../components/ClassifiedRecipeCard";
 
 const Search = () => {
   const { recipes } = useContext(RecipesContext);
-  const [filteredRecipes, setFilteredRecipes] = useState(recipes);
+  const [filteredRecipes, setFilteredRecipes] = useState([]);
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    if (search.length > 2) {
+      const filteredItems = recipes.filter((recipe) =>
+        recipe.name.toLowerCase().includes(search.toLowerCase())
+      );
+
+      setFilteredRecipes(filteredItems);
+    } else {
+      setFilteredRecipes([]);
+    }
+  }, [search]);
 
   /**
    *  when recipes change, filteredRecipes will not change
@@ -22,7 +35,7 @@ const Search = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Input autoFocus />
+      <Input autoFocus onChangeText={setSearch} value={search} />
 
       <FlatList
         data={filteredRecipes}
