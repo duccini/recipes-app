@@ -1,12 +1,19 @@
 import { memo } from "react";
-import { Image, Text, View } from "react-native";
+import { Image, Pressable, Text, View } from "react-native";
 
 import styles from "./styles";
 import Rating from "../Rating";
 
-const HealthyRecipeCard = ({ author, title, image, time, style }) => {
+const HealthyRecipeCard = ({
+  author,
+  title,
+  image,
+  time,
+  style,
+  handleOnPress,
+}) => {
   return (
-    <View style={[styles.container, style]}>
+    <Pressable onPress={handleOnPress} style={[styles.container, style]}>
       <View style={styles.rowContainer}>
         <View style={styles.header}>
           <Text numberOfLines={1} style={styles.title}>
@@ -41,7 +48,7 @@ const HealthyRecipeCard = ({ author, title, image, time, style }) => {
           <Text style={styles.footerText}>{time}</Text>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

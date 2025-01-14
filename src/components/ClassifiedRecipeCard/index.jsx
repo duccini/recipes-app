@@ -1,10 +1,10 @@
 import { memo } from "react";
-import { Image, Text, View } from "react-native";
+import { Image, Pressable, Text, View } from "react-native";
 import styles from "./styles";
 
-const ClassifiedRecipeCard = ({ title, time, image, style }) => {
+const ClassifiedRecipeCard = ({ title, time, image, style, handleOnPress }) => {
   return (
-    <View style={[styles.container, style]}>
+    <Pressable onPress={handleOnPress} style={[styles.container, style]}>
       <Image
         style={styles.recipeImage}
         source={{
@@ -17,7 +17,7 @@ const ClassifiedRecipeCard = ({ title, time, image, style }) => {
       </Text>
       <Text style={styles.textLabel}>Time</Text>
       <Text style={styles.textValue}>{time}</Text>
-    </View>
+    </Pressable>
   );
 };
 

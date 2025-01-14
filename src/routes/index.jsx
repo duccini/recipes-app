@@ -7,6 +7,7 @@ import Splash from "../screens/Splash";
 import Home from "../screens/Home";
 import Search from "../screens/Search";
 import ReturnButton from "../components/ReturnButton";
+import RecipeDetails from "../screens/RecipeDetails";
 
 const Stack = createStackNavigator();
 
@@ -41,6 +42,15 @@ const Routes = () => {
           options={{ headerLeft: (props) => <ReturnButton {...props} /> }}
           component={Search}
           name="Search"
+        />
+
+        <Stack.Screen
+          options={{
+            headerLeft: (props) => <ReturnButton {...props} />,
+            title: "",
+          }}
+          component={RecipeDetails}
+          name="RecipeDetails"
         />
       </Stack.Navigator>
     </NavigationContainer>

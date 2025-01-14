@@ -63,6 +63,7 @@ const Home = ({ navigation }) => {
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item, index }) => (
           <HealthyRecipeCard
+            handleOnPress={() => navigation.navigate("RecipeDetails", { item })}
             style={index === 0 ? { marginLeft: 24 } : null}
             title={item.name}
             time={`${Math.floor(Math.random() * 60) + 10} min`}
@@ -94,6 +95,7 @@ const Home = ({ navigation }) => {
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item, index }) => (
           <ClassifiedRecipeCard
+            handleOnPress={() => navigation.navigate("RecipeDetails", { item })}
             style={index === 0 ? { marginLeft: 24 } : null}
             title={item.name}
             time={`${Math.floor(Math.random() * 60) + 10} min`}

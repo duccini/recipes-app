@@ -7,7 +7,7 @@ import Input from "../../components/Input";
 import { RecipesContext } from "../../context/Recipes";
 import ClassifiedRecipeCard from "../../components/ClassifiedRecipeCard";
 
-const Search = () => {
+const Search = ({ navigation }) => {
   const { recipes } = useContext(RecipesContext);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [search, setSearch] = useState("");
@@ -43,6 +43,7 @@ const Search = () => {
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item }) => (
           <ClassifiedRecipeCard
+            handleOnPress={() => navigation.navigate("RecipeDetails", { item })}
             title={item.name}
             time={`${Math.floor(Math.random() * 60) + 10} min`}
             image={item.thumbnail_url}
