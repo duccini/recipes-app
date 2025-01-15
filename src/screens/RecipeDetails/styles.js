@@ -5,9 +5,11 @@ const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 24,
+    marginHorizontal: 24,
 
     flex: 1,
+
+    paddingBottom: 32,
   },
 
   thumbnail: {
@@ -15,12 +17,11 @@ const styles = StyleSheet.create({
     height: 300,
 
     borderRadius: 10,
-
-    marginBottom: 24,
   },
 
   title: {
     marginBottom: 12,
+    marginTop: 24,
   },
 
   row: {
@@ -41,6 +42,26 @@ const styles = StyleSheet.create({
 
   nutritionValue: {
     color: "rgba(0,0,0,0.45)",
+  },
+
+  instructionsRow: {
+    flexDirection: "row",
+
+    alignItems: "center",
+
+    marginVertical: 8,
+  },
+
+  index: {
+    fontSize: 20,
+    color: colors.grey2,
+    marginRight: 16,
+  },
+
+  instructionsText: {
+    fontSize: 14,
+    color: colors.black,
+    flex: 1,
   },
 });
 

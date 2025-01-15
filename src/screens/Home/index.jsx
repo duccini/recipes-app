@@ -14,9 +14,9 @@ import HealthyRecipeCard from "../../components/HealthyRecipeCard";
 import ClassifiedRecipeCard from "../../components/ClassifiedRecipeCard";
 
 const Home = ({ navigation }) => {
-  // const [tags, setTags] = useState([]);
-  const [tagsDisplayName, setTagsDisplayName] = useState([]);
+  const [tagsDisplayName, setTagsDisplayName] = useState(recipes);
   const [selectedTag, setSelectedTag] = useState("");
+  const [filteredRecipes, setFilteredRecipes] = useState([]);
   const { recipes, setRecipes, healthyRecipes, setHealthyRecipes } =
     useContext(RecipesContext);
 
@@ -39,8 +39,21 @@ const Home = ({ navigation }) => {
     setTagsDisplayName(tagsList);
   }, [recipes]);
 
+  useEffect(() => {
+    if (selectedTag) {
+      const filteredItems = recipes.filter((recipe) => {
+        const tag = recipe.tags.find((t) => t.display_name === selectedTag);
+        return !!tag;
+      });
+
+      setFilteredRecipes(filteredItems);
+    } else {
+      setFilteredRecipes(recipes);
+    }
+  }, [recipes, selectedTag]);
+
   const handleFetchRecipes = async () => {
-    const { results } = await getRecipesList(null, "15");
+    const { results } = await getRecipesList(null, "100");
     setRecipes(results);
   };
 
@@ -91,7 +104,7 @@ const Home = ({ navigation }) => {
         style={{ marginHorizontal: -24 }}
         horizontal
         showsHorizontalScrollIndicator={false}
-        data={recipes}
+        data={filteredRecipes}
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item, index }) => (
           <ClassifiedRecipeCard
